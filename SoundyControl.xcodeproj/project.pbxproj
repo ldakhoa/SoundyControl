@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A78E8152860BE2300B5C303 /* SimplyCoreAudio in Frameworks */ = {isa = PBXBuildFile; productRef = 6A78E8142860BE2300B5C303 /* SimplyCoreAudio */; };
 		6A7E845E28606DDF0063DD35 /* SoundyControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E845D28606DDF0063DD35 /* SoundyControlApp.swift */; };
 		6A7E846028606DDF0063DD35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E845F28606DDF0063DD35 /* ContentView.swift */; };
 		6A7E846228606DE00063DD35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A7E846128606DE00063DD35 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A78E8152860BE2300B5C303 /* SimplyCoreAudio in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +147,9 @@
 			dependencies = (
 			);
 			name = SoundyControl;
+			packageProductDependencies = (
+				6A78E8142860BE2300B5C303 /* SimplyCoreAudio */,
+			);
 			productName = SoundyControl;
 			productReference = 6A7E845A28606DDF0063DD35 /* SoundyControl.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +222,9 @@
 				Base,
 			);
 			mainGroup = 6A7E845128606DDF0063DD35;
+			packageReferences = (
+				6A78E8132860BE2300B5C303 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */,
+			);
 			productRefGroup = 6A7E845B28606DDF0063DD35 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -429,6 +437,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ldakhoa.SoundyControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -456,6 +465,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ldakhoa.SoundyControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -576,6 +586,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6A78E8132860BE2300B5C303 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rnine/SimplyCoreAudio";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6A78E8142860BE2300B5C303 /* SimplyCoreAudio */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A78E8132860BE2300B5C303 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */;
+			productName = SimplyCoreAudio;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6A7E845228606DDF0063DD35 /* Project object */;
 }

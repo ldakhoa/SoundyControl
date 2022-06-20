@@ -9,11 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        List {
+            ForEach(0..<2) { _ in
+                VStack(alignment: .leading, spacing: 3) {
+                    Label("Test", systemImage: "mic.fill")
+                        .font(.headline)
+                        .layoutPriority(1)
+                }
+            }
         }
     }
 }
