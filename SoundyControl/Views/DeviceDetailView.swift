@@ -11,7 +11,7 @@ struct DeviceDetailView: View {
     @ObservedObject var device: SoundyAudioDevice
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 12) {
             Label {
                 Text(device.name)
             } icon: {
@@ -21,9 +21,15 @@ struct DeviceDetailView: View {
             .font(.title)
             .frame(minHeight: 40)
 
+            DeviceSubheaderView(device: device)
+
+            Divider()
+
             DeviceDetailInfo(title: "Manufacturer", content: device.manufacturer)
             DeviceDetailInfo(title: "UID", content: device.uid)
             DeviceDetailInfo(title: "Model UID", content: device.modelUID)
+            
+            Divider()
             
             HStack(alignment: .center) {
                 Picker("Clock Source", selection: $device.clockSourceID) {
@@ -39,19 +45,26 @@ struct DeviceDetailView: View {
                 }
             }
             
-            if device.isDefaultInputDevice  {
-                defaultView(type: "input")
-            }
             
-            if device.isDefaultOutputDevice  {
-                defaultView(type: "output")
+            if device.isDefaultDevice {
+                if device.isDefaultInputDevice  {
+                    defaultView(type: "input")
+                }
+                
+                if device.isDefaultOutputDevice  {
+                    defaultView(type: "output")
+                }
+                
+                if device.isDefaultSystemOutputDevice  {
+                    defaultView(type: "system output")
+                }
             }
-            
-            if device.isDefaultSystemOutputDevice  {
-                defaultView(type: "system output")
-            }
+
         }
+        .padding()
         .navigationTitle(device.name)
+        
+        Spacer()
     }
     
     func defaultView(type: String) -> some View {

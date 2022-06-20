@@ -86,6 +86,10 @@ final class SoundyAudioDevice: ObservableObject {
         return "\(inChannelDescription) / \(outChannelDescription)"
     }
 
+    var isDefaultDevice: Bool {
+        isDefaultInputDevice || isDefaultOutputDevice || isDefaultSystemOutputDevice
+    }
+    
     func clockSourceName(for id: UInt32) -> String {
         device.clockSourceName(clockSourceID: id) ?? "Default"
     }
