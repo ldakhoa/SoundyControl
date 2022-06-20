@@ -16,5 +16,8 @@ struct SoundyControlApp: App {
                 .frame(minWidth: 300, idealWidth: 650, minHeight: 300)
                 .environmentObject(deviceViewModel)
         }
+        .commands {
+            SidebarCommands()
+        }
     }
 }

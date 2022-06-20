@@ -27,6 +27,7 @@ final class DeviceViewModel: ObservableObject {
         }
         
         devices = [SoundyAudioDevice](deviceForDevice.values.sorted(by: <))
+        print(deviceForDevice)
         
         updateDefaultInputDevice()
         updateDefaultOutputDevice()
