@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A7E845E28606DDF0063DD35 /* SoundyControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E845D28606DDF0063DD35 /* SoundyControlApp.swift */; };
+		6A7E846028606DDF0063DD35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E845F28606DDF0063DD35 /* ContentView.swift */; };
+		6A7E846228606DE00063DD35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A7E846128606DE00063DD35 /* Assets.xcassets */; };
+		6A7E846528606DE00063DD35 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A7E846428606DE00063DD35 /* Preview Assets.xcassets */; };
+		6A7E847028606DE00063DD35 /* SoundyControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E846F28606DE00063DD35 /* SoundyControlTests.swift */; };
+		6A7E847A28606DE10063DD35 /* SoundyControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E847928606DE10063DD35 /* SoundyControlUITests.swift */; };
+		6A7E847C28606DE10063DD35 /* SoundyControlUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E847B28606DE10063DD35 /* SoundyControlUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6A7E846C28606DE00063DD35 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A7E845228606DDF0063DD35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A7E845928606DDF0063DD35;
+			remoteInfo = SoundyControl;
+		};
+		6A7E847628606DE10063DD35 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A7E845228606DDF0063DD35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A7E845928606DDF0063DD35;
+			remoteInfo = SoundyControl;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6A7E845A28606DDF0063DD35 /* SoundyControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundyControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A7E845D28606DDF0063DD35 /* SoundyControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundyControlApp.swift; sourceTree = "<group>"; };
+		6A7E845F28606DDF0063DD35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6A7E846128606DE00063DD35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A7E846428606DE00063DD35 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6A7E846628606DE00063DD35 /* SoundyControl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoundyControl.entitlements; sourceTree = "<group>"; };
+		6A7E846B28606DE00063DD35 /* SoundyControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundyControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A7E846F28606DE00063DD35 /* SoundyControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundyControlTests.swift; sourceTree = "<group>"; };
+		6A7E847528606DE10063DD35 /* SoundyControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundyControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A7E847928606DE10063DD35 /* SoundyControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundyControlUITests.swift; sourceTree = "<group>"; };
+		6A7E847B28606DE10063DD35 /* SoundyControlUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundyControlUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A7E845728606DDF0063DD35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A7E846828606DE00063DD35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A7E847228606DE10063DD35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A7E845128606DDF0063DD35 = {
+			isa = PBXGroup;
+			children = (
+				6A7E845C28606DDF0063DD35 /* SoundyControl */,
+				6A7E846E28606DE00063DD35 /* SoundyControlTests */,
+				6A7E847828606DE10063DD35 /* SoundyControlUITests */,
+				6A7E845B28606DDF0063DD35 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6A7E845B28606DDF0063DD35 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A7E845A28606DDF0063DD35 /* SoundyControl.app */,
+				6A7E846B28606DE00063DD35 /* SoundyControlTests.xctest */,
+				6A7E847528606DE10063DD35 /* SoundyControlUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A7E845C28606DDF0063DD35 /* SoundyControl */ = {
+			isa = PBXGroup;
+			children = (
+				6A7E845D28606DDF0063DD35 /* SoundyControlApp.swift */,
+				6A7E845F28606DDF0063DD35 /* ContentView.swift */,
+				6A7E846128606DE00063DD35 /* Assets.xcassets */,
+				6A7E846628606DE00063DD35 /* SoundyControl.entitlements */,
+				6A7E846328606DE00063DD35 /* Preview Content */,
+			);
+			path = SoundyControl;
+			sourceTree = "<group>";
+		};
+		6A7E846328606DE00063DD35 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6A7E846428606DE00063DD35 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6A7E846E28606DE00063DD35 /* SoundyControlTests */ = {
+			isa = PBXGroup;
+			children = (
+				6A7E846F28606DE00063DD35 /* SoundyControlTests.swift */,
+			);
+			path = SoundyControlTests;
+			sourceTree = "<group>";
+		};
+		6A7E847828606DE10063DD35 /* SoundyControlUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6A7E847928606DE10063DD35 /* SoundyControlUITests.swift */,
+				6A7E847B28606DE10063DD35 /* SoundyControlUITestsLaunchTests.swift */,
+			);
+			path = SoundyControlUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6A7E845928606DDF0063DD35 /* SoundyControl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A7E847F28606DE10063DD35 /* Build configuration list for PBXNativeTarget "SoundyControl" */;
+			buildPhases = (
+				6A7E845628606DDF0063DD35 /* Sources */,
+				6A7E845728606DDF0063DD35 /* Frameworks */,
+				6A7E845828606DDF0063DD35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoundyControl;
+			productName = SoundyControl;
+			productReference = 6A7E845A28606DDF0063DD35 /* SoundyControl.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6A7E846A28606DE00063DD35 /* SoundyControlTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A7E848228606DE10063DD35 /* Build configuration list for PBXNativeTarget "SoundyControlTests" */;
+			buildPhases = (
+				6A7E846728606DE00063DD35 /* Sources */,
+				6A7E846828606DE00063DD35 /* Frameworks */,
+				6A7E846928606DE00063DD35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6A7E846D28606DE00063DD35 /* PBXTargetDependency */,
+			);
+			name = SoundyControlTests;
+			productName = SoundyControlTests;
+			productReference = 6A7E846B28606DE00063DD35 /* SoundyControlTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6A7E847428606DE10063DD35 /* SoundyControlUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A7E848528606DE10063DD35 /* Build configuration list for PBXNativeTarget "SoundyControlUITests" */;
+			buildPhases = (
+				6A7E847128606DE10063DD35 /* Sources */,
+				6A7E847228606DE10063DD35 /* Frameworks */,
+				6A7E847328606DE10063DD35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6A7E847728606DE10063DD35 /* PBXTargetDependency */,
+			);
+			name = SoundyControlUITests;
+			productName = SoundyControlUITests;
+			productReference = 6A7E847528606DE10063DD35 /* SoundyControlUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A7E845228606DDF0063DD35 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					6A7E845928606DDF0063DD35 = {
+						CreatedOnToolsVersion = 14.0;
+					};
+					6A7E846A28606DE00063DD35 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 6A7E845928606DDF0063DD35;
+					};
+					6A7E847428606DE10063DD35 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 6A7E845928606DDF0063DD35;
+					};
+				};
+			};
+			buildConfigurationList = 6A7E845528606DDF0063DD35 /* Build configuration list for PBXProject "SoundyControl" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6A7E845128606DDF0063DD35;
+			productRefGroup = 6A7E845B28606DDF0063DD35 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6A7E845928606DDF0063DD35 /* SoundyControl */,
+				6A7E846A28606DE00063DD35 /* SoundyControlTests */,
+				6A7E847428606DE10063DD35 /* SoundyControlUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A7E845828606DDF0063DD35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A7E846528606DE00063DD35 /* Preview Assets.xcassets in Resources */,
+				6A7E846228606DE00063DD35 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A7E846928606DE00063DD35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A7E847328606DE10063DD35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A7E845628606DDF0063DD35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A7E846028606DDF0063DD35 /* ContentView.swift in Sources */,
+				6A7E845E28606DDF0063DD35 /* SoundyControlApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A7E846728606DE00063DD35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A7E847028606DE00063DD35 /* SoundyControlTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A7E847128606DE10063DD35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A7E847C28606DE10063DD35 /* SoundyControlUITestsLaunchTests.swift in Sources */,
+				6A7E847A28606DE10063DD35 /* SoundyControlUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6A7E846D28606DE00063DD35 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A7E845928606DDF0063DD35 /* SoundyControl */;
+			targetProxy = 6A7E846C28606DE00063DD35 /* PBXContainerItemProxy */;
+		};
+		6A7E847728606DE10063DD35 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A7E845928606DDF0063DD35 /* SoundyControl */;
+			targetProxy = 6A7E847628606DE10063DD35 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6A7E847D28606DE10063DD35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6A7E847E28606DE10063DD35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		6A7E848028606DE10063DD35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SoundyControl/SoundyControl.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SoundyControl/Preview Content\"";
+				DEVELOPMENT_TEAM = 5SB3H4Y5NS;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ldakhoa.SoundyControl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6A7E848128606DE10063DD35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SoundyControl/SoundyControl.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SoundyControl/Preview Content\"";
+				DEVELOPMENT_TEAM = 5SB3H4Y5NS;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ldakhoa.SoundyControl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6A7E848328606DE10063DD35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5SB3H4Y5NS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ldakhoa.SoundyControlTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoundyControl.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SoundyControl";
+			};
+			name = Debug;
+		};
+		6A7E848428606DE10063DD35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5SB3H4Y5NS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ldakhoa.SoundyControlTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoundyControl.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SoundyControl";
+			};
+			name = Release;
+		};
+		6A7E848628606DE10063DD35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5SB3H4Y5NS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ldakhoa.SoundyControlUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = SoundyControl;
+			};
+			name = Debug;
+		};
+		6A7E848728606DE10063DD35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5SB3H4Y5NS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ldakhoa.SoundyControlUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = SoundyControl;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A7E845528606DDF0063DD35 /* Build configuration list for PBXProject "SoundyControl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A7E847D28606DE10063DD35 /* Debug */,
+				6A7E847E28606DE10063DD35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A7E847F28606DE10063DD35 /* Build configuration list for PBXNativeTarget "SoundyControl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A7E848028606DE10063DD35 /* Debug */,
+				6A7E848128606DE10063DD35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A7E848228606DE10063DD35 /* Build configuration list for PBXNativeTarget "SoundyControlTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A7E848328606DE10063DD35 /* Debug */,
+				6A7E848428606DE10063DD35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A7E848528606DE10063DD35 /* Build configuration list for PBXNativeTarget "SoundyControlUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A7E848628606DE10063DD35 /* Debug */,
+				6A7E848728606DE10063DD35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A7E845228606DDF0063DD35 /* Project object */;
+}
