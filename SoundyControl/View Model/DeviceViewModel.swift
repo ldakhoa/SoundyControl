@@ -33,11 +33,11 @@ final class DeviceViewModel: ObservableObject {
         updateDefaultOutputDevice()
         updateDefaultSystemDevice()
 
-        addSCAObservers()
+        addObservers()
     }
     
     deinit {
-        removeSCAObservers()
+        removeObservers()
     }
 }
 
@@ -66,7 +66,7 @@ private extension DeviceViewModel {
         }
     }
 
-    func addSCAObservers() {
+    func addObservers() {
         observers.append(contentsOf: [
             notificationCenter.addObserver(forName: .deviceListChanged, object: nil, queue: .main) { (notification) in
                 if let addedDevices = notification.userInfo?["addedDevices"] as? [AudioDevice] {
@@ -112,7 +112,7 @@ private extension DeviceViewModel {
         ])
     }
 
-    func removeSCAObservers() {
+    func removeObservers() {
         for observer in observers {
             notificationCenter.removeObserver(observer)
         }

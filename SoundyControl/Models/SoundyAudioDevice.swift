@@ -43,7 +43,13 @@ final class SoundyAudioDevice: ObservableObject {
     @Published var isDefaultOutputDevice: Bool
     @Published var isDefaultSystemOutputDevice: Bool
     
-    static let defaultDevice = SoundyAudioDevice(device: SimplyCoreAudio().defaultOutputDevice!)
+    var currentOutputDeviceVolume: Float32? {
+        SimplyCoreAudio().defaultOutputDevice?.virtualMainVolume(scope: .output)
+    }
+
+    var currentInputDeviceVolume: Float32? {
+        SimplyCoreAudio().defaultInputDevice?.virtualMainVolume(scope: .input)
+    }
     
     private let device: AudioDevice
     
@@ -96,7 +102,6 @@ final class SoundyAudioDevice: ObservableObject {
 }
 
 extension SoundyAudioDevice: Hashable {
-
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
@@ -110,3 +115,13 @@ func < (lhs: SoundyAudioDevice, rhs: SoundyAudioDevice) -> Bool {
     lhs.hashValue == rhs.hashValue
 }
 
+#if DEBUG
+extension SoundyAudioDevice {
+    static let defaultDevice = SoundyAudioDevice(device: SimplyCoreAudio().defaultOutputDevice!)
+}
+
+extension Float32 {
+    static let defaultInput = SimplyCoreAudio().defaultInputDevice?.virtualMainVolume(scope: .input) ?? 0
+    static let defaultOutput = SimplyCoreAudio().defaultOutputDevice?.virtualMainVolume(scope: .output) ?? 0
+}
+#endif

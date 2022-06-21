@@ -8,13 +8,18 @@
 import SwiftUI
 import SimplyCoreAudio
 
-struct DeviceItem: View {
+struct DeviceSidebarItem: View {
     
     @ObservedObject var device: SoundyAudioDevice
     
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
-            Label(device.name, systemImage: device.systemImageName)
+            if device.isDefaultDevice {
+                
+            }
+            Label(
+                "\(device.isDefaultDevice ? "(*)" : "" ) \(device.name)",
+                systemImage: device.systemImageName)
                 .font(.headline)
                 .layoutPriority(1)
             
@@ -24,8 +29,8 @@ struct DeviceItem: View {
     }
 }
 
-struct DeviceItem_Previews: PreviewProvider {
+struct DeviceSidebarItem_Previews: PreviewProvider {
     static var previews: some View {
-        DeviceItem(device: SoundyAudioDevice.defaultDevice)
+        DeviceSidebarItem(device: SoundyAudioDevice.defaultDevice)
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     @EnvironmentObject var deviceViewModel: DeviceViewModel
     @State var selectedDevice: SoundyAudioDevice?
     
@@ -16,11 +16,14 @@ struct ContentView: View {
             List {
                 ForEach(deviceViewModel.devices, id: \.self) { device in
                     NavigationLink(
-                        destination: DeviceDetailView(device: device),
+                        destination: DeviceDetailView(
+                            device: device,
+                            inputVolume: device.currentInputDeviceVolume ?? 0,
+                            outputVolume: device.currentOutputDeviceVolume ?? 0),
                         tag: device,
                         selection: $selectedDevice
                     ) {
-                        DeviceItem(device: device)
+                        DeviceSidebarItem(device: device)
                     }
                     .accentColor(.accentColor)
                 }
@@ -36,11 +39,9 @@ struct ContentView: View {
     }
 }
 
-
-
-struct ContentView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView()
             .environmentObject(DeviceViewModel())
     }
 }

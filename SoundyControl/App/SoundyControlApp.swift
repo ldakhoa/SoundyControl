@@ -12,7 +12,7 @@ struct SoundyControlApp: App {
     @StateObject private var deviceViewModel = DeviceViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
                 .frame(minWidth: 300, idealWidth: 650, minHeight: 300)
                 .environmentObject(deviceViewModel)
         }
