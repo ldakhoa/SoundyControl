@@ -99,6 +99,14 @@ final class SoundyAudioDevice: ObservableObject {
     func clockSourceName(for id: UInt32) -> String {
         device.clockSourceName(clockSourceID: id) ?? "Default"
     }
+    
+    func outputVolume(_ volume: Float32) {
+        device.setVirtualMainVolume(volume, scope: .output)
+    }
+    
+    func inputVolume(_ volume: Float32) {
+        device.setVirtualMainVolume(volume, scope: .input)
+    }
 }
 
 extension SoundyAudioDevice: Hashable {

@@ -12,11 +12,15 @@ struct DeviceDetailView: View {
     
     @State private var inputVolume: Float32
     @State private var outputVolume: Float32
+    @State private var isOutputMute: Bool
+    @State private var isInputMute: Bool
     
     init(device: SoundyAudioDevice, inputVolume: Float32, outputVolume: Float32) {
         self.device = device
         self.inputVolume = inputVolume
         self.outputVolume = outputVolume
+        self.isOutputMute = outputVolume == 0
+        self.isInputMute = inputVolume == 0
     }
     
     var body: some View {
@@ -41,25 +45,8 @@ struct DeviceDetailView: View {
             Divider()
             
             HStack(alignment: .center) {
-                Picker("Clock Source", selection: $device.clockSourceID) {
-                    if device.clockSourceIDs.isEmpty {
-                        Text(device.clockSourceName)
-                            .tag(device.clockSourceID)
-                    } else {
-                        ForEach(device.clockSourceIDs, id: \.self) { clockSourceID in
-                            Text(device.clockSourceName(for: clockSourceID))
-                        }
-                    }
-
-                }
-                .disabled(device.clockSourceIDs.count <= 1)
-                
-                Picker("Sample Rate:", selection: $device.nominalSampleRate) {
-                    ForEach(device.nominalSampleRates, id: \.self) { sampleRate in
-                        Text(sampleRate.kHertzs)
-                    }
-                }
-                .disabled(device.nominalSampleRates.count <= 1)
+                clockSourceView()
+                sampleRateView()
             }
             
             if device.isDefaultDevice {
@@ -100,24 +87,55 @@ struct DeviceDetailView: View {
             .font(.subheadline).italic()
     }
     
-    private func outputVolumeView() -> some View {
-        HStack {
-            let outputVolumeStr = String(format: "%.1f", outputVolume * 100)
-            Text("Output Volume: \(outputVolumeStr)%")
-            Spacer()
-            HStack {
-                Image(systemName: "speaker.wave.1.fill")
-                    .foregroundColor(.white.opacity(0.5))
-                Slider(
-                    value: $outputVolume,
-                    in: 0...1,
-                    step: 0.1)
-                .blendMode(.plusLighter)
-                .frame(width: 150)
-                Image(systemName: "speaker.wave.3.fill")
-                    .foregroundColor(.white.opacity(0.5))
+    private func clockSourceView() -> some View {
+        Picker("Clock Source", selection: $device.clockSourceID) {
+            if device.clockSourceIDs.isEmpty {
+                Text(device.clockSourceName)
+                    .tag(device.clockSourceID)
+            } else {
+                ForEach(device.clockSourceIDs, id: \.self) { clockSourceID in
+                    Text(device.clockSourceName(for: clockSourceID))
+                }
+            }
+
+        }
+        .disabled(device.clockSourceIDs.count <= 1)
+    }
+    
+    private func sampleRateView() -> some View {
+        Picker("Sample Rate:", selection: $device.nominalSampleRate) {
+            ForEach(device.nominalSampleRates, id: \.self) { sampleRate in
+                Text(sampleRate.kHertzs)
             }
         }
+        .disabled(device.nominalSampleRates.count <= 1)
+    }
+    
+    private func outputVolumeView() -> some View {
+        HStack {
+            let outputVolumeStr = String(format: "%.f", outputVolume * 100)
+            Text("Output Volume: \(outputVolumeStr)%")
+            Spacer()
+            VStack(alignment: .trailing) {
+                HStack {
+                    Image(systemName: "speaker.wave.1.fill")
+                        .foregroundColor(.white.opacity(0.5))
+                    Slider(
+                        value: $outputVolume,
+                        in: 0...1,
+                        step: 0.1, onEditingChanged: { _ in
+                            device.outputVolume(outputVolume)
+                        })
+                    .blendMode(.plusLighter)
+                    .frame(width: 150)
+                    Image(systemName: "speaker.wave.3.fill")
+                        .foregroundColor(.white.opacity(0.5))
+                }
+//                Toggle("Mute", isOn: $isOutputMute)
+            }
+        }
+        
+
     }
     
     private func inputVolumeView() -> some View {
@@ -131,7 +149,10 @@ struct DeviceDetailView: View {
                     .foregroundColor(.white.opacity(0.5))
                 Slider(value: $inputVolume,
                        in: 0...1,
-                       step: 0.1)
+                       step: 0.1,
+                       onEditingChanged: { _ in
+                    device.inputVolume(inputVolume)
+                })
                 .blendMode(.plusLighter)
                 .frame(width: 150)
                 Image(systemName: "mic.and.signal.meter.fill")
