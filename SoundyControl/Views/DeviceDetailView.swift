@@ -65,8 +65,13 @@ struct DeviceDetailView: View {
             if device.isDefaultDevice {
                 Divider()
                 
-                outputVolumeView()
-                inputVolumeView()
+                if device.isDefaultOutputDevice {
+                    outputVolumeView()
+                }
+                
+                if device.isDefaultInputDevice {
+                    inputVolumeView()
+                }
                 
                 Divider()
                 
