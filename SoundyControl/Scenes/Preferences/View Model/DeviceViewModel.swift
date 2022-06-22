@@ -39,6 +39,13 @@ final class DeviceViewModel: ObservableObject {
     deinit {
         removeObservers()
     }
+    
+    func defaultInputDevice() -> SoundyAudioDevice {
+        if let device = devices.filter ({ $0.isDefaultInputDevice }).first {
+            return device
+        }
+        return SoundyAudioDevice(device: SimplyCoreAudio().defaultOutputDevice!)
+    }
 }
 
 private extension DeviceViewModel {

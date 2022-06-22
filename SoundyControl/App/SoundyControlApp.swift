@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct SoundyControlApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    
     @StateObject private var deviceViewModel = DeviceViewModel()
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            PreferencesView()
                 .frame(minWidth: 300, idealWidth: 650, minHeight: 300)
                 .environmentObject(deviceViewModel)
         }

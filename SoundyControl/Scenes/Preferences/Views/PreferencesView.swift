@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct PreferencesView: View {
     @EnvironmentObject var deviceViewModel: DeviceViewModel
     @State var selectedDevice: SoundyAudioDevice?
     
@@ -39,9 +39,9 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
+struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        PreferencesView()
             .environmentObject(DeviceViewModel())
     }
 }

@@ -126,6 +126,7 @@ func < (lhs: SoundyAudioDevice, rhs: SoundyAudioDevice) -> Bool {
 #if DEBUG
 extension SoundyAudioDevice {
     static let defaultDevice = SoundyAudioDevice(device: SimplyCoreAudio().defaultOutputDevice!)
+    static let defaultInputDevice = SoundyAudioDevice(device: SimplyCoreAudio().defaultInputDevice!)
 }
 
 extension Float32 {
