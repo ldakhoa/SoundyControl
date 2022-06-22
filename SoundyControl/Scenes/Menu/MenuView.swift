@@ -11,11 +11,10 @@ import SimplyCoreAudio
 struct MenuView: View {
     @EnvironmentObject var deviceViewModel: DeviceViewModel
     private let simplyCoreAudio = SimplyCoreAudio()
-//    @State var outputVolume: Float32
-//    @State private var isOutputMute: Bool = true
     @State private var inputVolume: Float32 = .defaultInput
-    @State private var previousInputVolume: Float32 = .defaultInput
+    @State private var outputVolume: Float32 = .defaultInput
     @State private var isInputMute: Bool = false
+    @State private var isOutputMute: Bool = false
     @State private var inputDeviceSelect: SoundyAudioDevice = .defaultInputDevice
     
     var body: some View {
@@ -37,7 +36,7 @@ struct MenuView: View {
             VStack {
                 Text("Output")
                     .font(.headline)
-                inputVolumeView()
+                outputVolumeView()
                 List(selection: $inputDeviceSelect, content: {
                     ForEach(outputDevices, id: \.self) { device in
                         DeviceMenuRow(device: device)
@@ -68,30 +67,63 @@ struct MenuView: View {
         .padding()
     }
     
+    private func outputVolumeView() -> some View {
+        SimplyCoreAudio.setVirtualMainOutputVolume(volume: isOutputMute ? 0 : outputVolume)
+        let outputVolumeStr = String(format: "%.f", outputVolume * 100)
+        let content = "Output Volume: \(outputVolumeStr)%"
+        return volumeView(
+            volumeContent: content,
+            value: $outputVolume,
+            toggleMute: $isOutputMute,
+            leadingImageName: "mic.fill",
+            trailingImageName: "mic.and.signal.meter.fill"
+        ) { _ in
+            SimplyCoreAudio.setVirtualMainOutputVolume(volume: outputVolume)
+        }
+    }
+    
     private func inputVolumeView() -> some View {
         SimplyCoreAudio.setVirtualMainInputVolume(volume: isInputMute ? 0 : inputVolume )
-        
+        let inputVolumeStr = String(format: "%.f", inputVolume * 100)
+        let content = "Input Volume: \(inputVolumeStr)%"
+        return volumeView(
+            volumeContent: content,
+            value: $inputVolume,
+            toggleMute: $isInputMute,
+            leadingImageName: "speaker.wave.1.fill",
+            trailingImageName: "speaker.wave.3.fill"
+        ) { _ in
+            SimplyCoreAudio.setVirtualMainInputVolume(volume: inputVolume)
+        }
+    }
+    
+    private func volumeView(
+        volumeContent: String,
+        value: Binding<Float32>,
+        toggleMute: Binding<Bool>,
+        leadingImageName: String,
+        trailingImageName: String,
+        onEditingChanged: @escaping (Bool) -> Void
+    ) -> some View {
         return VStack(alignment: .leading) {
             HStack {
-                let inputVolumeStr = String(format: "%.f", inputVolume * 100)
-                Text("Input Volume: \(inputVolumeStr)%")
+                Text(volumeContent)
                 Spacer()
-                Toggle("Mute", isOn: $isInputMute)
+                Toggle("Mute", isOn: toggleMute)
             }
-
             Spacer()
             HStack {
-                Image(systemName: "speaker.wave.1.fill")
+                Image(systemName: leadingImageName)
                     .foregroundColor(.white.opacity(0.5))
                 Slider(
-                    value: $inputVolume,
+                    value: value,
                     in: 0...1,
-                    step: 0.1, onEditingChanged: { _ in
-                        SimplyCoreAudio.setVirtualMainInputVolume(volume: inputVolume)
+                    step: 0.1, onEditingChanged: { changed in
+                        onEditingChanged(changed)
                     })
                 .blendMode(.plusLighter)
             
-                Image(systemName: "speaker.wave.3.fill")
+                Image(systemName: trailingImageName)
                     .foregroundColor(.white.opacity(0.5))
             }
             Spacer()
