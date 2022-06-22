@@ -197,14 +197,14 @@
 		6A7E845C28606DDF0063DD35 /* SoundyControl */ = {
 			isa = PBXGroup;
 			children = (
-				6AFFDE352863402000FEF6B1 /* Resources */,
-				6A7DFA372862EC75004661B3 /* Views */,
-				6A78E8202860EBB300B5C303 /* Models */,
-				6A76FC7C2862476F00BC6617 /* Scenes */,
-				6A0BFB432861C2A800B856DE /* Utils */,
 				6A78E8212860EBBB00B5C303 /* App */,
-				6A7E846628606DE00063DD35 /* SoundyControl.entitlements */,
+				6A78E8202860EBB300B5C303 /* Models */,
 				6A7E846328606DE00063DD35 /* Preview Content */,
+				6AFFDE352863402000FEF6B1 /* Resources */,
+				6A76FC7C2862476F00BC6617 /* Scenes */,
+				6A7E846628606DE00063DD35 /* SoundyControl.entitlements */,
+				6A0BFB432861C2A800B856DE /* Utils */,
+				6A7DFA372862EC75004661B3 /* Views */,
 			);
 			path = SoundyControl;
 			sourceTree = "<group>";

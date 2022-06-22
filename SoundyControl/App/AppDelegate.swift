@@ -20,7 +20,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         if let statusButton = statusItem.button {
-            statusButton.image = NSImage(systemSymbolName: "headphones.circle", accessibilityDescription: "Sound Control App")
+            statusButton.image = NSImage(systemSymbolName: "hifispeaker.2.fill", accessibilityDescription: "Sound Control App")
             statusButton.action = #selector(togglePopover)
         }
         popOver.contentViewController = NSHostingController(rootView: MenuView().environmentObject(DeviceViewModel()))

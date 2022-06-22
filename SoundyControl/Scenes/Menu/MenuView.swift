@@ -12,10 +12,11 @@ struct MenuView: View {
     @EnvironmentObject var deviceViewModel: DeviceViewModel
     private let simplyCoreAudio = SimplyCoreAudio()
     @State private var inputVolume: Float32 = .defaultInput
-    @State private var outputVolume: Float32 = .defaultInput
+    @State private var outputVolume: Float32 = .defaultOutput
     @State private var isInputMute: Bool = false
     @State private var isOutputMute: Bool = false
     @State private var inputDeviceSelect: SoundyAudioDevice = .defaultInputDevice
+    @State private var outputDeviceSelect: SoundyAudioDevice = .defaultDevice
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -37,13 +38,13 @@ struct MenuView: View {
                 Text("Output")
                     .font(.headline)
                 outputVolumeView()
-                List(selection: $inputDeviceSelect, content: {
+                List(selection: $outputDeviceSelect, content: {
                     ForEach(outputDevices, id: \.self) { device in
                         DeviceMenuRow(device: device)
                     }
                 })
-                .onChange(of: inputDeviceSelect) { newInputDevice in
-                    newInputDevice.isDefaultInputDevice = true
+                .onChange(of: outputDeviceSelect) { newOutputDevice in
+                    newOutputDevice.isDefaultOutputDevice = true
                 }
             }
             
