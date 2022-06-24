@@ -63,7 +63,6 @@ struct MenuView: View {
                     newInputDevice.isDefaultInputDevice = true
                 }
             }
-            
         }
         .padding()
     }
