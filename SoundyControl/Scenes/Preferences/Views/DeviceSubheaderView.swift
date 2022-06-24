@@ -25,8 +25,10 @@ struct DeviceSubheaderView: View {
     }
 }
 
+#if DEBUG
 struct DeviceSubheaderView_Previews: PreviewProvider {
     static var previews: some View {
         DeviceSubheaderView(device: SoundyAudioDevice.defaultDevice)
     }
 }
+#endif

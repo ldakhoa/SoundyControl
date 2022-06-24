@@ -176,8 +176,10 @@ struct DeviceDetailInfo: View {
     }
 }
 
+#if DEBUG
 struct DeviceDetailView_Previews: PreviewProvider {
     static var previews: some View {
         DeviceDetailView(device: SoundyAudioDevice.defaultDevice, inputVolume: .defaultInput, outputVolume: .defaultOutput)
     }
 }
+#endif

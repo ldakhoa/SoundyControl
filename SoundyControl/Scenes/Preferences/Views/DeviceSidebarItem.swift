@@ -29,8 +29,10 @@ struct DeviceSidebarItem: View {
     }
 }
 
+#if DEBUG
 struct DeviceSidebarItem_Previews: PreviewProvider {
     static var previews: some View {
         DeviceSidebarItem(device: SoundyAudioDevice.defaultDevice)
     }
 }
+#endif

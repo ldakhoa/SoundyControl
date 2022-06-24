@@ -123,7 +123,6 @@ func < (lhs: SoundyAudioDevice, rhs: SoundyAudioDevice) -> Bool {
     lhs.hashValue == rhs.hashValue
 }
 
-#if DEBUG
 extension SoundyAudioDevice {
     static let defaultDevice = SoundyAudioDevice(device: SimplyCoreAudio().defaultOutputDevice!)
     static let defaultInputDevice = SoundyAudioDevice(device: SimplyCoreAudio().defaultInputDevice!)
@@ -133,4 +132,3 @@ extension Float32 {
     static let defaultInput = SimplyCoreAudio().defaultInputDevice?.virtualMainVolume(scope: .input) ?? 0
     static let defaultOutput = SimplyCoreAudio().defaultOutputDevice?.virtualMainVolume(scope: .output) ?? 0
 }
-#endif
