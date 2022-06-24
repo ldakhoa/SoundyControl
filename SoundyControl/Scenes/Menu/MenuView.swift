@@ -9,6 +9,7 @@ import SwiftUI
 import SimplyCoreAudio
 
 struct MenuView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var deviceViewModel: DeviceViewModel
     private let simplyCoreAudio = SimplyCoreAudio()
     @State private var inputVolume: Float32 = .defaultInput
@@ -113,22 +114,25 @@ struct MenuView: View {
             }
             Spacer()
             HStack {
-                Image(systemName: leadingImageName)
-                    .foregroundColor(.white.opacity(0.5))
+                makeImage(imageName: leadingImageName)
                 Slider(
                     value: value,
                     in: 0...1,
                     step: 0.1, onEditingChanged: { changed in
                         onEditingChanged(changed)
                     })
-                .blendMode(.plusLighter)
+                .blendMode(colorScheme == .dark ? .plusLighter :.normal)
             
-                Image(systemName: trailingImageName)
-                    .foregroundColor(.white.opacity(0.5))
+                makeImage(imageName: trailingImageName)
             }
             Spacer()
         }
         .frame(height: 50)
+    }
+    
+    private func makeImage(imageName: String) -> some View {
+        Image(systemName: imageName)
+            .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .gray)
     }
 }
 

@@ -131,7 +131,6 @@ struct DeviceDetailView: View {
                     Image(systemName: "speaker.wave.3.fill")
                         .foregroundColor(.white.opacity(0.5))
                 }
-//                Toggle("Mute", isOn: $isOutputMute)
             }
         }
         
