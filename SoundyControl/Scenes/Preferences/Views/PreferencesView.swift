@@ -10,28 +10,38 @@ import SwiftUI
 struct PreferencesView: View {
     @EnvironmentObject var deviceViewModel: DeviceViewModel
     @State var selectedDevice: SoundyAudioDevice?
+    @State private var launchAtLogin = false
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(deviceViewModel.devices, id: \.self) { device in
-                    NavigationLink(
-                        destination: DeviceDetailView(
-                            device: device,
-                            inputVolume: device.currentInputDeviceVolume ?? 0,
-                            outputVolume: device.currentOutputDeviceVolume ?? 0),
-                        tag: device,
-                        selection: $selectedDevice
-                    ) {
-                        DeviceSidebarItem(device: device)
+            VStack(alignment: .leading) {
+                List {
+                    ForEach(deviceViewModel.devices, id: \.self) { device in
+                        NavigationLink(
+                            destination: DeviceDetailView(device: device),
+                            tag: device,
+                            selection: $selectedDevice
+                        ) {
+                            DeviceSidebarItem(device: device)
+                        }
+                        .accentColor(.accentColor)
                     }
-                    .accentColor(.accentColor)
+                    .listRowInsets(EdgeInsets())
+                    
+                    Spacer()
                 }
-                .listRowInsets(EdgeInsets())
+                .listStyle(SidebarListStyle())
+                .frame(minWidth: 250, idealWidth: 250)
+                .navigationTitle("Devices")
+                
+                Spacer()
+                
+                Divider()
+                Toggle(isOn: $launchAtLogin) {
+                    Text("Launch at login")
+                }
+                .padding(EdgeInsets(top: 0, leading: 12, bottom: 12, trailing: 12))
             }
-            .listStyle(SidebarListStyle())
-            .frame(minWidth: 250, idealWidth: 250)
-            .navigationTitle("Devices")
         }
         .onAppear {
             selectedDevice = deviceViewModel.devices.first

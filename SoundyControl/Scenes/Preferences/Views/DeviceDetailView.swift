@@ -6,22 +6,15 @@
 //
 
 import SwiftUI
+import SimplyCoreAudio
 
 struct DeviceDetailView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var device: SoundyAudioDevice
-    
-    @State private var inputVolume: Float32
-    @State private var outputVolume: Float32
-    @State private var isOutputMute: Bool
-    @State private var isInputMute: Bool
-    
-    init(device: SoundyAudioDevice, inputVolume: Float32, outputVolume: Float32) {
-        self.device = device
-        self.inputVolume = inputVolume
-        self.outputVolume = outputVolume
-        self.isOutputMute = outputVolume == 0
-        self.isInputMute = inputVolume == 0
-    }
+    @State private var inputVolume: Float32 = .defaultInput
+    @State private var outputVolume: Float32 = .defaultOutput
+    @State private var isOutputMute: Bool = SimplyCoreAudio.outputMuting
+    @State private var isInputMute: Bool = SimplyCoreAudio.inputMuting
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -118,23 +111,19 @@ struct DeviceDetailView: View {
             Spacer()
             VStack(alignment: .trailing) {
                 HStack {
-                    Image(systemName: "speaker.wave.1.fill")
-                        .foregroundColor(.white.opacity(0.5))
+                    makeImage(imageName: "speaker.wave.1.fill")
                     Slider(
                         value: $outputVolume,
                         in: 0...1,
                         step: 0.1, onEditingChanged: { _ in
                             device.outputVolume(outputVolume)
                         })
-                    .blendMode(.plusLighter)
+                    .blendMode(colorScheme == .dark ? .plusLighter :.normal)
                     .frame(width: 150)
-                    Image(systemName: "speaker.wave.3.fill")
-                        .foregroundColor(.white.opacity(0.5))
+                    makeImage(imageName: "speaker.wave.3.fill")
                 }
             }
         }
-        
-
     }
     
     private func inputVolumeView() -> some View {
@@ -144,20 +133,24 @@ struct DeviceDetailView: View {
 
             Spacer()
             HStack {
-                Image(systemName: "mic.fill")
-                    .foregroundColor(.white.opacity(0.5))
+                makeImage(imageName: "mic.fill")
                 Slider(value: $inputVolume,
                        in: 0...1,
                        step: 0.1,
                        onEditingChanged: { _ in
                     device.inputVolume(inputVolume)
                 })
-                .blendMode(.plusLighter)
+                .blendMode(colorScheme == .dark ? .plusLighter :.normal)
                 .frame(width: 150)
-                Image(systemName: "mic.and.signal.meter.fill")
-                    .foregroundColor(.white.opacity(0.5))
+                
+                makeImage(imageName: "mic.and.signal.meter.fill")
             }
         }
+    }
+    
+    private func makeImage(imageName: String) -> some View {
+        Image(systemName: imageName)
+            .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .gray)
     }
 }
 
@@ -178,7 +171,7 @@ struct DeviceDetailInfo: View {
 #if DEBUG
 struct DeviceDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DeviceDetailView(device: SoundyAudioDevice.defaultDevice, inputVolume: .defaultInput, outputVolume: .defaultOutput)
+        DeviceDetailView(device: SoundyAudioDevice.defaultDevice)
     }
 }
 #endif

@@ -25,7 +25,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     }
     
     private func makeNSMenu() -> NSMenu {
-        let menuView = NSHostingController(rootView: MenuView().environmentObject(DeviceViewModel()))
+        let menuView = NSHostingController(rootView: MenuView()
+            .environmentObject(DeviceViewModel())
+        )
         menuView.view.frame.size = .init(width: 300, height: 600)
         let menu = NSMenu()
         let menuItem = NSMenuItem()
