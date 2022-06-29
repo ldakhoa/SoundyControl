@@ -25,6 +25,7 @@
 		6A7E847028606DE00063DD35 /* SoundyControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E846F28606DE00063DD35 /* SoundyControlTests.swift */; };
 		6A7E847A28606DE10063DD35 /* SoundyControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E847928606DE10063DD35 /* SoundyControlUITests.swift */; };
 		6A7E847C28606DE10063DD35 /* SoundyControlUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E847B28606DE10063DD35 /* SoundyControlUITestsLaunchTests.swift */; };
+		6A9DCEA1286C7B1E0063A42D /* Image+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9DCEA0286C7B1E0063A42D /* Image+Style.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		6A7E847528606DE10063DD35 /* SoundyControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundyControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A7E847928606DE10063DD35 /* SoundyControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundyControlUITests.swift; sourceTree = "<group>"; };
 		6A7E847B28606DE10063DD35 /* SoundyControlUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundyControlUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6A9DCEA0286C7B1E0063A42D /* Image+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Style.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				6A0BFB442861C2AF00B856DE /* Float64+.swift */,
 				6A4B787228632AAB005B0C74 /* SimplyCoreAudio.swift */,
+				6A9DCEA0286C7B1E0063A42D /* Image+Style.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				6A4B787328632AAB005B0C74 /* SimplyCoreAudio.swift in Sources */,
 				6A78E8172860C28E00B5C303 /* DeviceViewModel.swift in Sources */,
 				6A78E81B2860CD8100B5C303 /* DeviceSidebarItem.swift in Sources */,
+				6A9DCEA1286C7B1E0063A42D /* Image+Style.swift in Sources */,
 				6A78E8232860ED6800B5C303 /* DeviceSubheaderView.swift in Sources */,
 				6A76FC7B2862428600BC6617 /* AppDelegate.swift in Sources */,
 				6A7E846028606DDF0063DD35 /* PreferencesView.swift in Sources */,

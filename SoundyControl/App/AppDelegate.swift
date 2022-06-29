@@ -12,7 +12,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     
     private var popOver: NSPopover = {
         let view = NSPopover()
-        view.contentSize = .init(width: 300, height: 600)
+        view.contentSize = .init(width: 400, height: 600)
         view.behavior = .transient
         return view
     }()

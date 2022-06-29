@@ -7,95 +7,116 @@
 
 import SwiftUI
 import SimplyCoreAudio
+import AudioToolbox
 
 struct MenuView: View {
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var deviceViewModel: DeviceViewModel
     private let simplyCoreAudio = SimplyCoreAudio()
-    @State private var inputVolume: Float32 = .defaultInput
-    @State private var outputVolume: Float32 = .defaultOutput
-    @State private var isInputMute: Bool = false
-    @State private var isOutputMute: Bool = false
-    @State private var inputDeviceSelect: SoundyAudioDevice = .defaultInputDevice
-    @State private var outputDeviceSelect: SoundyAudioDevice = .defaultDevice
+    @State private var selectedOutputDevice = Set<SoundyAudioDevice.ID>()
+    @State private var selectedInputDevice = Set<SoundyAudioDevice.ID>()
     
     var body: some View {
         VStack(alignment: .leading) {
-            let outputSoundyDevices = simplyCoreAudio.allOutputDevices.map { SoundyAudioDevice(device: $0) }
-            let outputDevices = outputSoundyDevices.filter { device in
-                device.transportType == .bluetooth || device.transportType == .usb || device.transportType == .builtIn || device.transportType == .unknown
-            }.sorted { device1, device2 in
-                device1.isDefaultOutputDevice
-            }
+            let outputDevices = devices(type: .output)
+            let inputDevices = devices(type: .input)
             
-            let inputSoundyDevices = simplyCoreAudio.allInputDevices.map { SoundyAudioDevice(device: $0) }
-            let inputDevices = inputSoundyDevices.filter { device in
-                device.transportType == .bluetooth || device.transportType == .usb || device.transportType == .builtIn || device.transportType == .unknown
-            }.sorted { device1, device2 in
-                device1.isDefaultInputDevice
-            }
-            
-            VStack {
-                Text("Output")
-                    .font(.headline)
-                outputVolumeView()
-                List(selection: $outputDeviceSelect, content: {
-                    ForEach(outputDevices, id: \.self) { device in
-                        DeviceMenuRow(device: device)
-                    }
-                })
-                .onChange(of: outputDeviceSelect) { newOutputDevice in
-                    newOutputDevice.isDefaultOutputDevice = true
-                }
+            if let outputDevice = outputDevices.filter { $0.isDefaultOutputDevice }.first {
+                let outputView = VolumeView(volumeType: .output, device: outputDevice)
+                mainVolumeView(
+                    devices: outputDevices,
+                    tableSelection: $selectedOutputDevice,
+                    title: "Output",
+                    deviceView: outputView)
             }
             
             Divider()
             
-            VStack {
-                Text("Input")
-                    .font(.headline)
-                inputVolumeView()
-                List(selection: $inputDeviceSelect, content: {
-                    ForEach(inputDevices, id: \.self) { device in
-                        DeviceMenuRow(device: device)
-                    }
-                })
-                .onChange(of: inputDeviceSelect) { newInputDevice in
-                    newInputDevice.isDefaultInputDevice = true
-                }
+            if let inputDevice = outputDevices.filter { $0.isDefaultInputDevice }.first {
+                let inputView = VolumeView(volumeType: .input, device: inputDevice)
+                mainVolumeView(
+                    devices: inputDevices,
+                    tableSelection: $selectedInputDevice,
+                    title: "Input",
+                    deviceView: inputView)
             }
         }
         .padding()
     }
     
-    private func outputVolumeView() -> some View {
-        SimplyCoreAudio.setVirtualMainOutputVolume(volume: isOutputMute ? 0 : outputVolume)
-        let outputVolumeStr = String(format: "%.f", outputVolume * 100)
+    private func devices(type: SoundyAudioDevice.VolumeType) -> [SoundyAudioDevice] {
+        let soundyDevices = type == .output ?
+            simplyCoreAudio.allOutputDevices.map { SoundyAudioDevice(device: $0) } :
+            simplyCoreAudio.allInputDevices.map { SoundyAudioDevice(device: $0) }
+            
+        let devices = soundyDevices.filter { device in
+            device.transportType == .bluetooth || device.transportType == .usb || device.transportType == .builtIn || device.transportType == .unknown
+        }.sorted { device1, device2 in
+            type == .output ? device1.isDefaultOutputDevice : device1.isDefaultInputDevice
+        }
+        return devices
+    }
+    
+    private func mainVolumeView(
+        devices: [SoundyAudioDevice],
+        tableSelection: Binding<Set<SoundyAudioDevice.ID>>,
+        title: String,
+        deviceView: some View
+    ) -> some View {
+        VStack {
+            Text(title)
+                .font(.headline)
+            deviceView
+            Table(devices, selection: tableSelection) {
+                TableColumn("Name", value: \.name)
+                TableColumn("Type", value: \.transportType!.rawValue)
+            }
+            .onChange(of: selectedOutputDevice) { newValue in
+                if let id = newValue.map({ AudioObjectID($0) }).first,
+                   let outputDevice = devices.filter({ $0.id == id }).first {
+                    outputDevice.isDefaultOutputDevice = true
+                }
+            }
+        }
+    }
+}
+
+struct VolumeView: View {
+    let volumeType: SoundyAudioDevice.VolumeType
+    @Environment(\.colorScheme) private var colorScheme
+    @State private var isOutputMute: Bool = SimplyCoreAudio.outputMuting
+    @State private var isInputMute: Bool = SimplyCoreAudio.inputMuting
+    @ObservedObject var device: SoundyAudioDevice
+    
+    var body: some View {
+        volumeType == .output ? AnyView(outputView()) : AnyView(inputView())
+    }
+        
+    private func outputView() -> some View {
+        SimplyCoreAudio.setVirtualMainOutputVolume(volume: isOutputMute ? 0 : device.outputDeviceVolume)
+        let outputVolumeStr = String(format: "%.f", device.outputDeviceVolume * 100)
+        print(outputVolumeStr)
         let content = "Output Volume: \(outputVolumeStr)%"
         return volumeView(
             volumeContent: content,
-            value: $outputVolume,
+            value: $device.outputDeviceVolume,
             toggleMute: $isOutputMute,
-            leadingImageName: "mic.fill",
-            trailingImageName: "mic.and.signal.meter.fill"
-        ) { _ in
-            SimplyCoreAudio.setVirtualMainOutputVolume(volume: outputVolume)
-        }
+            leadingImageName: "speaker.wave.1.fill",
+            trailingImageName: "speaker.wave.3.fill"
+        )
     }
     
-    private func inputVolumeView() -> some View {
-        SimplyCoreAudio.setVirtualMainInputVolume(volume: isInputMute ? 0 : inputVolume )
-        let inputVolumeStr = String(format: "%.f", inputVolume * 100)
+    private func inputView() -> some View {
+        SimplyCoreAudio.setVirtualMainInputVolume(volume: isInputMute ? 0 : device.inputDeviceVolume)
+        let inputVolumeStr = String(format: "%.f", device.inputDeviceVolume * 100)
         let content = "Input Volume: \(inputVolumeStr)%"
         return volumeView(
             volumeContent: content,
-            value: $inputVolume,
+            value: $device.inputDeviceVolume,
             toggleMute: $isInputMute,
-            leadingImageName: "speaker.wave.1.fill",
-            trailingImageName: "speaker.wave.3.fill"
-        ) { _ in
-            SimplyCoreAudio.setVirtualMainInputVolume(volume: inputVolume)
-        }
+            leadingImageName: "mic.fill",
+            trailingImageName: "mic.and.signal.meter.fill"
+        )
     }
     
     private func volumeView(
@@ -103,10 +124,9 @@ struct MenuView: View {
         value: Binding<Float32>,
         toggleMute: Binding<Bool>,
         leadingImageName: String,
-        trailingImageName: String,
-        onEditingChanged: @escaping (Bool) -> Void
+        trailingImageName: String
     ) -> some View {
-        return VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
             HStack {
                 Text(volumeContent)
                 Spacer()
@@ -114,38 +134,36 @@ struct MenuView: View {
             }
             Spacer()
             HStack {
-                makeImage(imageName: leadingImageName)
+                Image(systemName: leadingImageName)
+                    .makeStyle(with: colorScheme)
+                    .onTapGesture {
+                        if device.isDefaultOutputDevice {
+                            device.outputDeviceVolume = 0
+                        } else if device.isDefaultInputDevice {
+                            device.inputDeviceVolume = 0
+                        }
+                    }
+                
                 Slider(
                     value: value,
                     in: 0...1,
-                    step: 0.1, onEditingChanged: { changed in
-                        onEditingChanged(changed)
-                    })
+                    step: 0.1
+                )
                 .blendMode(colorScheme == .dark ? .plusLighter :.normal)
             
-                makeImage(imageName: trailingImageName)
+                Image(systemName: trailingImageName)
+                    .makeStyle(with: colorScheme)
+                    .onTapGesture(perform: {
+                        if device.isDefaultOutputDevice {
+                            device.outputDeviceVolume = 1
+                        } else if device.isDefaultInputDevice {
+                            device.inputDeviceVolume = 1
+                        }
+                    })
             }
             Spacer()
         }
         .frame(height: 50)
-    }
-    
-    private func makeImage(imageName: String) -> some View {
-        Image(systemName: imageName)
-            .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .gray)
-    }
-}
-
-struct DeviceMenuRow: View {
-    @ObservedObject var device: SoundyAudioDevice
-    
-    var body: some View {
-        HStack() {
-            Text(device.name)
-            Spacer()
-            Text(device.transportType?.rawValue ?? "Unknown")
-        }
-        .padding(.all, 8)
     }
 }
 

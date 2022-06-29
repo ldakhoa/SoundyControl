@@ -9,7 +9,7 @@ import SimplyCoreAudio
 import CoreAudio
 import Foundation
 
-final class SoundyAudioDevice: ObservableObject {
+final class SoundyAudioDevice: ObservableObject, Identifiable {
     @Published var id: AudioObjectID
     @Published var name: String
     @Published var transportType: TransportType?
@@ -43,14 +43,18 @@ final class SoundyAudioDevice: ObservableObject {
     @Published var isDefaultOutputDevice: Bool
     @Published var isDefaultSystemOutputDevice: Bool
     
-    var currentOutputDeviceVolume: Float32? {
-        SimplyCoreAudio().defaultOutputDevice?.virtualMainVolume(scope: .output)
-    }
-
-    var currentInputDeviceVolume: Float32? {
-        SimplyCoreAudio().defaultInputDevice?.virtualMainVolume(scope: .input)
+    @Published var outputDeviceVolume: Float32 = SimplyCoreAudio().defaultOutputDevice?.virtualMainVolume(scope: .output) ?? 0 {
+        didSet {
+            device.setVirtualMainVolume(outputDeviceVolume, scope: .output)
+        }
     }
     
+    @Published var inputDeviceVolume: Float32 = SimplyCoreAudio().defaultInputDevice?.virtualMainVolume(scope: .input) ?? 0 {
+        didSet {
+            device.setVirtualMainVolume(inputDeviceVolume, scope: .input)
+        }
+    }
+
     private let device: AudioDevice
     
     init(device: AudioDevice) {
@@ -99,19 +103,18 @@ final class SoundyAudioDevice: ObservableObject {
     func clockSourceName(for id: UInt32) -> String {
         device.clockSourceName(clockSourceID: id) ?? "Default"
     }
-    
-    func outputVolume(_ volume: Float32) {
-        device.setVirtualMainVolume(volume, scope: .output)
-    }
-    
-    func inputVolume(_ volume: Float32) {
-        device.setVirtualMainVolume(volume, scope: .input)
-    }
 }
 
 extension SoundyAudioDevice: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+}
+
+extension SoundyAudioDevice {
+    enum VolumeType {
+        case input
+        case output
     }
 }
 

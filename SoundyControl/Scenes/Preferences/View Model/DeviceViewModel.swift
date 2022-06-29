@@ -26,8 +26,10 @@ final class DeviceViewModel: ObservableObject {
             deviceForDevice[device] = SoundyAudioDevice(device: device)
         }
         
-        devices = [SoundyAudioDevice](deviceForDevice.values.sorted(by: <))
-        print(deviceForDevice)
+        devices = [SoundyAudioDevice](deviceForDevice.values.sorted(by: <)).sorted { $0.name < $1.name }
+        #if DEBUG
+        deviceForDevice.values.forEach { print($0.name) }
+        #endif
         
         updateDefaultInputDevice()
         updateDefaultOutputDevice()
@@ -44,7 +46,7 @@ final class DeviceViewModel: ObservableObject {
         if let device = devices.filter ({ $0.isDefaultInputDevice }).first {
             return device
         }
-        return SoundyAudioDevice(device: SimplyCoreAudio().defaultOutputDevice!)
+        return SoundyAudioDevice(device: simply.defaultOutputDevice!)
     }
 }
 
@@ -101,7 +103,7 @@ private extension DeviceViewModel {
                 self.updateDefaultSystemDevice()
             },
 
-            notificationCenter.addObserver(forName: .deviceNominalSampleRateDidChange, object: nil, queue: .main) { (notification) in
+            notificationCenter.addObserver(forName: .deviceNominalSampleRateDidChange, object: nil, queue: .main) { notification in
                 if let _device = notification.object as? AudioDevice, let device = self.deviceForDevice[_device] {
                     if let nominalSampleRate = _device.nominalSampleRate {
                         device.nominalSampleRate = nominalSampleRate
@@ -109,13 +111,30 @@ private extension DeviceViewModel {
                 }
             },
 
-            notificationCenter.addObserver(forName: .deviceClockSourceDidChange, object: nil, queue: .main) { (notification) in
+            notificationCenter.addObserver(forName: .deviceClockSourceDidChange, object: nil, queue: .main) { notification in
                 if let _device = notification.object as? AudioDevice, let device = self.deviceForDevice[_device] {
                     if let clockSourceName = _device.clockSourceName {
                         device.clockSourceName = clockSourceName
                     }
                 }
             },
+            
+            notificationCenter.addObserver(forName: .deviceVolumeDidChange, object: nil, queue: .main, using: { notification in
+                
+                if let v = self.simply.defaultOutputDevice?.virtualMainVolume(scope: .output) {
+//                    print("Change: ", v)
+                    for device in self.devices {
+                        device.outputDeviceVolume = v
+                    }
+                }
+                
+//                if let _device = notification.object as? AudioDevice,
+//                   let device = self.deviceForDevice[_device],
+//                    let outputVolume = _device.virtualMainVolume(scope: .output) {
+//                    device.outputDeviceVolume = outputVolume
+//                    print("device volume did change: ", device.outputDeviceVolume)
+//                }
+            })
         ])
     }
 

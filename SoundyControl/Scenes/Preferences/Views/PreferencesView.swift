@@ -36,11 +36,13 @@ struct PreferencesView: View {
                 
                 Spacer()
                 
+                #if DEBUG
                 Divider()
                 Toggle(isOn: $launchAtLogin) {
                     Text("Launch at login")
                 }
                 .padding(EdgeInsets(top: 0, leading: 12, bottom: 12, trailing: 12))
+                #endif
             }
         }
         .onAppear {

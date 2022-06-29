@@ -11,8 +11,6 @@ import SimplyCoreAudio
 struct DeviceDetailView: View {
     @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var device: SoundyAudioDevice
-    @State private var inputVolume: Float32 = .defaultInput
-    @State private var outputVolume: Float32 = .defaultOutput
     @State private var isOutputMute: Bool = SimplyCoreAudio.outputMuting
     @State private var isInputMute: Bool = SimplyCoreAudio.inputMuting
     
@@ -26,11 +24,11 @@ struct DeviceDetailView: View {
             }
             .font(.title)
             .frame(minHeight: 40)
-
+            
             DeviceSubheaderView(device: device)
-
+            
             Divider()
-
+            
             DeviceDetailInfo(title: "Manufacturer", content: device.manufacturer)
             DeviceDetailInfo(title: "UID", content: device.uid)
             DeviceDetailInfo(title: "Model UID", content: device.modelUID)
@@ -67,7 +65,18 @@ struct DeviceDetailView: View {
                     defaultView(type: "system output")
                 }
             }
-
+            
+#if DEBUG
+            if !device.isDefaultDevice {
+                Divider()
+                Button {
+                    
+                } label: {
+                    Text(device.isOutputOnlyDevice ? "Set as default output" : "Set as default input")
+                }
+            }
+#endif
+            
         }
         .padding()
         .navigationTitle("Soundy Control")
@@ -90,7 +99,7 @@ struct DeviceDetailView: View {
                     Text(device.clockSourceName(for: clockSourceID))
                 }
             }
-
+            
         }
         .disabled(device.clockSourceIDs.count <= 1)
     }
@@ -105,45 +114,59 @@ struct DeviceDetailView: View {
     }
     
     private func outputVolumeView() -> some View {
-        HStack {
-            let outputVolumeStr = String(format: "%.f", outputVolume * 100)
-            Text("Output Volume: \(outputVolumeStr)%")
-            Spacer()
-            VStack(alignment: .trailing) {
-                HStack {
-                    makeImage(imageName: "speaker.wave.1.fill")
-                    Slider(
-                        value: $outputVolume,
-                        in: 0...1,
-                        step: 0.1, onEditingChanged: { _ in
-                            device.outputVolume(outputVolume)
-                        })
-                    .blendMode(colorScheme == .dark ? .plusLighter :.normal)
-                    .frame(width: 150)
-                    makeImage(imageName: "speaker.wave.3.fill")
-                }
-            }
-        }
+        volumeView(
+            volumeContent: "Output Volume: \(String(format: "%.f", device.outputDeviceVolume * 100))%",
+            value: $device.outputDeviceVolume,
+            leadingImageName: "speaker.wave.1.fill",
+            trailingImageName: "speaker.wave.3.fill"
+        )
     }
     
     private func inputVolumeView() -> some View {
+        volumeView(
+            volumeContent: "Input Volume: \(String(format: "%.f", device.inputDeviceVolume * 100))%",
+            value: $device.inputDeviceVolume,
+            leadingImageName: "mic.fill",
+            trailingImageName: "mic.and.signal.meter.fill"
+        )
+    }
+    
+    private func volumeView(
+        volumeContent: String,
+        value: Binding<Float32>,
+        leadingImageName: String,
+        trailingImageName: String
+    ) -> some View {
         HStack {
-            let inputVolumeString = String(format: "%.1f", inputVolume * 100)
-            Text("Input Volume: \(inputVolumeString)%")
-
+            Text(volumeContent)
             Spacer()
             HStack {
-                makeImage(imageName: "mic.fill")
-                Slider(value: $inputVolume,
-                       in: 0...1,
-                       step: 0.1,
-                       onEditingChanged: { _ in
-                    device.inputVolume(inputVolume)
-                })
+                Image(systemName: leadingImageName)
+                    .makeStyle(with: colorScheme)
+                    .onTapGesture {
+                        if device.isDefaultOutputDevice {
+                            device.outputDeviceVolume = 0
+                        } else if device.isDefaultInputDevice {
+                            device.inputDeviceVolume = 0
+                        }
+                    }
+
+                Slider(
+                    value: value,
+                    in: 0...1,
+                    step: 0.1)
                 .blendMode(colorScheme == .dark ? .plusLighter :.normal)
                 .frame(width: 150)
                 
-                makeImage(imageName: "mic.and.signal.meter.fill")
+                Image(systemName: trailingImageName)
+                    .makeStyle(with: colorScheme)
+                    .onTapGesture(perform: {
+                        if device.isDefaultOutputDevice {
+                            device.outputDeviceVolume = 1
+                        } else if device.isDefaultInputDevice {
+                            device.inputDeviceVolume = 1
+                        }
+                    })
             }
         }
     }
